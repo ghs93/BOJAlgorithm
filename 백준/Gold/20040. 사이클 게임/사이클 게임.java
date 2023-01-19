@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-    static int[] parents, cnt;
+    static int[] parents;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -14,7 +14,6 @@ public class Main {
         int M = Integer.parseInt(st.nextToken());
 
         parents = new int[N];
-        cnt = new int[N];
         for (int i = 0; i < N; i++) {
             parents[i] = i;
         }
@@ -36,12 +35,10 @@ public class Main {
     }
 
     public static int find(int a) {
-        int pa = parents[a];
-
-        if(pa == a)
+        if(parents[a] == a)
             return a;
 
-        return parents[a] = find(pa);
+        return parents[a] = find(parents[a]);
     }
 
     public static boolean union(int a, int b) {
