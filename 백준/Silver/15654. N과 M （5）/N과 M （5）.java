@@ -28,16 +28,16 @@ public class Main {
 
         Arrays.sort(arr);
         perm(0);
+
+        System.out.println(sb);
     }
 
     static void perm(int cnt) {
         if (cnt == M) {
-            sb.setLength(0);
-            
             for(int t : tmp)
                 sb.append(t).append(' ');
 
-            System.out.println(sb);
+            sb.append('\n');
             return;
         }
 
