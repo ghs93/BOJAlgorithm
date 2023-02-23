@@ -6,9 +6,9 @@ import java.util.StringTokenizer;
 
 public class Main {
     static int N;
-    static int max = Integer.MIN_VALUE;
+    static int max = Integer.MIN_VALUE, leaf;
     static ArrayList<int[]>[] tree;
-    static boolean[] parents, visited;
+    static boolean[] visited;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -16,7 +16,6 @@ public class Main {
 
         N = Integer.parseInt(br.readLine());
         tree = new ArrayList[N+1];
-        parents = new boolean[N+1];
 
         for (int i = 0; i <= N; i++) {
             tree[i] = new ArrayList<>();
@@ -31,16 +30,15 @@ public class Main {
 
             tree[from].add(new int[] {to, weight});
             tree[to].add(new int[] {from, weight});
-            parents[from] = true;
         }
 
-        for (int i = 1; i <= N; i++) {
-            if(!parents[i]) {
-                visited = new boolean[N+1];
-                visited[i] = true;
-                dfs(i, 0);
-            }
-        }
+        visited = new boolean[N+1];
+        visited[1] = true;
+        dfs(1, 0);
+
+        visited = new boolean[N+1];
+        visited[leaf] = true;
+        dfs(leaf, 0);
 
         System.out.println(max);
     }
@@ -57,7 +55,10 @@ public class Main {
         }
 
         if(end) {
-            max = Math.max(max, sum);
+            if(sum > max) {
+                max = sum;
+                leaf = cur;
+            }
         }
     }
 }
