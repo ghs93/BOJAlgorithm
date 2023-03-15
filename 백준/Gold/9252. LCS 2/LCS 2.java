@@ -26,10 +26,9 @@ public class Main {
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append(dp[N][M]).append('\n');
+        int result = dp[N][M];
 
-        Stack<Character> stack = new Stack<>();
-        while (N > 0 && M > 0) {
+        while (N != 0 && M != 0) {
             int tmp = dp[N][M];
 
             if (tmp == dp[N-1][M]) {
@@ -39,16 +38,14 @@ public class Main {
                 M--;
 
             } else {
-                stack.add(src[N-1]);
+                sb.append(src[N-1]);
                 N--;
                 M--;
             }
         }
 
-        while (!stack.isEmpty()) {
-            sb.append(stack.pop());
-        }
-
+        sb.reverse();
+        sb.insert(0, '\n').insert(0, result);
         System.out.println(sb);
     }
 }
