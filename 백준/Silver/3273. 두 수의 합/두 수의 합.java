@@ -20,16 +20,20 @@ public class Main {
         Arrays.sort(arr);
 
         int index = Integer.parseInt(br.readLine());
-        int cnt = 0;
-        for (int i = 0; i < n-1; i++) {
-            if (arr[i] >= index) break;
+        int cnt = 0, left = 0, right = n-1;
+        while(left < right) {
+            int sum = arr[left] + arr[right];
 
-            for (int j = n-1; j > i; j--) {
-                int sum = arr[i] + arr[j];
+            if (sum == index) {
+                cnt++;
+                left++;
+                right--;
 
-                if (sum == index) cnt++;
+            } else if (sum > index) {
+                right--;
 
-                if (sum < index) break;
+            } else {
+                left++;
             }
         }
 
